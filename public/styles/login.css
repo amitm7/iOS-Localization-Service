@@ -1,0 +1,76 @@
+html,body {
+  padding: 0px; margin: 0px;
+  font-family: myriad pro ;
+}
+
+#loginBox {
+  margin: 120px auto;
+  border-radius: 7px;
+  background: #ebebeb;
+  width: 400px;
+  height: 278px;
+  border: solid rgb(191,191,191) 1px;
+}
+
+#loginBox h1 {
+  border-top-right-radius: 7px;
+  border-top-left-radius: 7px;
+
+  height: 36px;
+  background: #dedede;
+  color: rgb(144,142,148);
+  text-align: center;
+  padding: 12px 0px;
+  margin: 0px;
+  text-shadow: 0.2em rgb(194, 195, 197)
+}
+
+.form_block {
+  background: white;
+  border-radius: 7px;
+  margin: 20px auto;
+  position: relative;
+  border: solid rgb(191,191,191) 1px;
+  width: 325px;
+  padding: 20px 20px;
+}
+
+.form_block label, .form_block input[type=text], .form_block input[type=password] {
+  font-size: 14pt;
+  background: none;
+
+  position: absolute;
+  left: 20px; right: 20px;
+  top: 10px;
+  margin: 0px;
+  padding: 0px;
+
+}
+
+.form_block label {
+  color: #4da6e5;
+}
+
+.form_block input[type=text], .form_block input[type=password] {
+  color: #4da6e5;
+  border: none;
+  outline: none;
+}
+
+form {
+  position: relative;
+}
+
+input[type=submit] {
+  cursor: pointer;
+  border: none;
+  width: 152px;
+  height: 57px;
+  background: url(images/loginButton.png);
+  position: absolute;
+  right: 20px;
+}
+
+input[type=submit]:hover {
+  background: url(images/loginButtonHover.png);
+}
