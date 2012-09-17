@@ -1,4 +1,8 @@
 IOSLocalizationService::Application.routes.draw do
+  root :to => 'login#index'
+  match 'login' => 'login#login'
+  match 'logout' => 'login#logout'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

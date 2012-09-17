@@ -49,6 +49,7 @@ html,body {
 
 .form_block label {
   color: #4da6e5;
+  opacity: 0.4;
 }
 
 .form_block input[type=text], .form_block input[type=password] {
@@ -69,6 +70,7 @@ input[type=submit] {
   background: url(images/loginButton.png);
   position: absolute;
   right: 20px;
+  outline: none;
 }
 
 input[type=submit]:hover {
