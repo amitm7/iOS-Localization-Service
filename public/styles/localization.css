@@ -1,0 +1,42 @@
+html, body {
+  background: white;
+  padding: 0px;
+  margin: 0px;
+  height: 100%;
+  font-family: helvetica, arial;
+
+}
+body {
+
+}
+#wrapper {
+  background: url(images/rim.png);
+  background-repeat: repeat-y;
+  margin: 0px auto;
+  width: 1000px;
+  padding: 0px 101px;
+  min-height: 100%;
+}
+
+#header {
+  background: url(images/header.png);
+  height: 80px;
+  position: relative;
+}
+
+#languageSelector {
+  position: absolute;
+  top: 18px; left: 20px;
+  width: 134px; height: 32px;
+}
+
+#logoutButton {
+  position: absolute;
+  top: 22px; right: 30px;
+  width:71px; height:30px;
+  background: url(images/logoutButton.png);
+}
+
+#logoutButton:hover {
+  background: url(images/logoutButtonHover.png);
+}

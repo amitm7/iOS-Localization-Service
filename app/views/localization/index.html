@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <script type="text/javascript" src="scripts/jquery-1.8.1.min.js"></script>
+    <script type="text/javascript" src="scripts/jquery.ddslick.js"></script>
+    <script type="text/javascript" src="scripts/localization.js"></script>
+    <link rel="Stylesheet" href="styles/localization.css" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="header">
+
+        <select id="languageSelector">
+          <option value="SP">English</option>
+          <option value="SP">Russian</option>
+          <option value="SP">Spanish</option>
+          <option value="SP">New York</option>
+        </select>
+
+        <a href="/doLogout" id="logoutButton"></a>
+      </div>
+      <div id="content">
+        <table id="phraseTable">
+          <tr class="template">
+            <td class="key"></td>
+            <td class="phrase"></td>
+            <td class="controls">
+              <a href="#">edit key</a>
+              <a href="#">edit phrase</a>
+              <a href="#">delete key</a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
