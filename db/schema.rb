@@ -10,28 +10,32 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120917174412) do
+ActiveRecord::Schema.define(:version => 0) do
 
-  create_table "entries", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "keys", :force => true do |t|
+  create_table "phrase_keys", :force => true do |t|
+    t.string "name", :null => false
+    t.integer "maxLength", :null => true
+    t.binary "screenshot"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
   create_table "languages", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string "name", :limit => 200, :null => false
+    t.string "file", :limit => 200, :null => false
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email"
-    t.string   "password"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string "email", :null => false
+    t.string "password", :null => false
+  end
+
+  create_table "phrases" do |t|
+    t.references :language, :null => false
+    t.references :pharseKey, :null => false
+    t.references :
+    t.string "content", :null => false
+    t.timestamps
   end
 
 end

@@ -1,22 +1,32 @@
+require 'digest/md5'
+
 class LoginController < ApplicationController
   def index
-    #redirect_to(@book)
     render "login"
   end
 
   def login
-    @user = User.where(:email => "loofy2@gmail.com", :password => "password1").first;
-    session[:user] = @user
-
-    if @user.nil?
-      render :json => "fail"
+    password = Digest::MD5.hexdigest(params[:password])
+    user = User.where(:email => params[:email], :password => password).first;
+    if user.nil?
+      render :text => "fail"
     else
-      render :json => "success"
+      session[:user] = user
+      render :text => "success"
     end
   end
 
   def logout
     reset_session
-    render :nothing => true
+    redirect_to :controller=>'login', :action=> 'index'
+  end
+
+  def createuser
+    if params[:email].nil? or params[:password].nil?
+      return
+    end
+
+    password = Digest::MD5.hexdigest(params[:password])
+    User.create(:email => params[:email], :password => password)
   end
 end
