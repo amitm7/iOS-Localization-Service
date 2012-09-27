@@ -1,3 +1,3 @@
 class Phrase < ActiveRecord::Base
-  attr_accessible :content, :key, :language
+  attr_accessible :content, :phraseKey, :language
 end

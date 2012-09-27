@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(:version => 0) do
   create_table "phrases" do |t|
     t.references :language, :null => false
     t.references :pharseKey, :null => false
-    t.references :
     t.string "content", :null => false
     t.timestamps
   end
