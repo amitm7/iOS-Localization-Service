@@ -8,12 +8,11 @@
   <body>
     <div id="wrapper">
       <div id="header">
-
         <select id="languageSelector">
-          <option value="SP">English</option>
-          <option value="SP">Russian</option>
-          <option value="SP">Spanish</option>
-          <option value="SP">New York</option>
+          <% @languages.each do |language| %>
+            <option value="<%=language.name %>"><%=language.name %></option>
+          <% end %>
+          %>
         </select>
 
         <a href="/doLogout" id="logoutButton"></a>
@@ -24,9 +23,9 @@
             <td class="key"></td>
             <td class="phrase"></td>
             <td class="controls">
-              <a href="#">edit key</a>
-              <a href="#">edit phrase</a>
-              <a href="#">delete key</a>
+              <a href="#editKey">k</a>
+              <a href="#editPhrase">e</a>
+              <a href="#deleteKey">d</a>
             </td>
           </tr>
         </table>

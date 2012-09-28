@@ -4,5 +4,12 @@ IOSLocalizationService::Application.routes.draw do
   match 'doLogin' => 'login#login'
   match 'doLogout' => 'login#logout'
   match 'createuser' => 'login#createuser'
-  
+  match 'phraseKeys' => 'localization#phraseKeys'
+  match 'phrases' => 'localization#phrases'
+  match 'phraseDetails' => 'localization#phraseDetails'
+  match 'phraseKeyDetails' => 'localization#phraseKeyDetails'
+  match 'savePhrase' => 'localization#savePhrase'
+  match 'savePhraseKey' => 'localization#savePhraseKey'
+  match 'deletePhraseKey' => 'localization#deletePhraseKey'
+  match 'imageForPhraseKey' => 'localization#imageForPhraseKey'
 end
