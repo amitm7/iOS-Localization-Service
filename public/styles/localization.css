@@ -40,3 +40,15 @@ body {
 #logoutButton:hover {
   background: url(images/logoutButtonHover.png);
 }
+
+.template {
+  display: none;
+}
+
+#content {
+  padding: 20px;
+}
+
+#phraseTable {
+  border-spacing: 6px;
+}
