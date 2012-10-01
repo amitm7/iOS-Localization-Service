@@ -10,13 +10,14 @@
       <div id="header">
         <select id="languageSelector">
           <% @languages.each do |language| %>
-            <option value="<%=language.name %>"><%=language.name %></option>
+            <option value="<%=language.id %>"><%=language.name %></option>
           <% end %>
           %>
         </select>
 
         <a href="/doLogout" id="logoutButton"></a>
       </div>
+      
       <div id="content">
         <a id="addKey" href="#">Add Key</a>
         <table id="phraseTable">
@@ -30,6 +31,13 @@
           </tr>
         </table>
       </div>
+
+      <div id="keyEditor" class="dialog">
+      </div>
+
+      <div id="phraseEditor" class="dialog">
+      </div>
+
     </div>
   </body>
 </html>

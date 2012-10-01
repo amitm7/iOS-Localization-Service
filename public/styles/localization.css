@@ -41,6 +41,10 @@ body {
   background: url(images/logoutButtonHover.png);
 }
 
+.dialog {
+  width: 100%;
+  background: ;
+}
 .template {
   display: none;
 }

@@ -6,70 +6,75 @@ function localization() {
   var currentLanguage = 1;
 
   function init() {
-    $("#languageSelector").ddslick({onSelected: refreshPhraseKeys});
-    refreshPhraseKeys();
+    $("#languageSelector").ddslick({onSelected: function(item) {
+      currentLanguage = item.selectedData.value;
+      refreshPhraseKeys();
+    }});
+
   }
 
   function refreshPhraseKeys() {
     $.get("/phraseKeys", null, function(data) {
-      buildPhraseKeysDictionary(data)
+      phraseKeys = data;
       showPhrasesForLanguage(currentLanguage);
     });
   }
 
-  function buildPhraseKeysDictionary(data) {
-    phraseKeys = [];
-    for(var i=0;i<data.length;i++) {
-      phraseKeys[data[i].id] = data[i];
-    }
-  }
-
   function showPhrasesForLanguage(language) {
     $.get("/phrases", {language_id: language}, function(phrases) {
-      buildLanguageGrid(phrases)
-    });    
+      buildLanguageGrid(phrases);
+    });
   }
 
   function buildLanguageGrid(phrases) {
-    var rows = [];
-
-    for(phraseIndex in phrases) {
-      rows.push(phraseWithKey(phrases[phraseIndex]));
-    }
-
-    rows.sort(function(a,b) {
-      return (a.key < b.key) ? -1 : 1;
-    });
+    var rows = keysWithPhrases(phrases);
+    $("#phraseTable .row").remove();
 
     for(var rowIndex in rows) {
       createRow(rows[rowIndex])
     }
   }
 
-  function phraseWithKey(p) {
+  function keysWithPhrases(phrases) {
     var maxPhraseLength = 80;
     var maxKeyLength = 32;
+    var output = [];
+    var phraseDictionary = buildPhraseDictionary(phrases);
 
-    var phraseKey = phraseKeys[p.phrase_key_id].name;
-    var phrase = p.content;
+    for(var phraseKeyIndex in phraseKeys) {
+      var phraseKey = phraseKeys[phraseKeyIndex];
+      var phrase = phraseDictionary[phraseKey.id];
+      var phraseContent = null;
+      if(phrase) {
+        phraseContent = phrase.content.length > maxPhraseLength ? phrase.content.substring(0,maxPhraseLength) + "..." : phrase.content
+      } else {
+        phraseContent = "<NO PHRASE SET>"
+      }
 
-    if(phraseKey.length > maxKeyLength) {
-      phraseKey = phraseKey.substring(0,maxKeyLength) + "...";
+      output.push({
+        id: phraseKey.id,
+        key: phraseKey.name.length > maxKeyLength ? phraseKey.name.substring(0,maxKeyLength) + "..." : phraseKey.name,
+        phrase: phraseContent
+      });
     }
 
-    if(phrase.length > maxPhraseLength) {
-      phrase = phrase.substring(0,maxPhraseLength) + "...";
+    return output.sort(function(a,b) {
+      return (a.key < b.key) ? -1 : 1;
+    });
+  }
+
+  function buildPhraseDictionary(phrases) {
+    var dictionary = [];
+    for(var phraseIndex in phrases) {
+      var phrase = phrases[phraseIndex];
+      dictionary[phrase.phrase_key_id] = phrase;
     }
 
-    return {
-      id: p.id,
-      key: phraseKey,
-      phrase: phrase
-    }
+    return dictionary;
   }
 
   function createRow(row) {
-    $("#phraseTable .template").clone().removeClass("template").addClass("phrase")
+    $("#phraseTable .template").clone().removeClass("template").addClass("row")
       .find(".key").text(row.key).end()
       .find(".phrase").text(row.phrase).end()
       .appendTo("#phraseTable");
