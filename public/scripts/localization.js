@@ -76,7 +76,10 @@ function localization() {
   function createRow(row) {
     $("#phraseTable .template").clone().removeClass("template").addClass("row")
       .find(".key").text(row.key).end()
-      .find(".phrase").text(row.phrase).end()
+      .find(".phrase")
+        .text(row.phrase)
+        .attr("href", "#"+row.id)
+      .end()
       .appendTo("#phraseTable");
   }
 }

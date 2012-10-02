@@ -17,30 +17,25 @@ body {
   padding: 0px 101px;
   min-height: 100%;
 }
-
 #header {
   background: url(images/header.png);
   height: 80px;
   position: relative;
 }
-
 #languageSelector {
   position: absolute;
   top: 18px; left: 20px;
   width: 134px; height: 32px;
 }
-
 #logoutButton {
   position: absolute;
   top: 22px; right: 30px;
   width:71px; height:30px;
   background: url(images/logoutButton.png);
 }
-
 #logoutButton:hover {
   background: url(images/logoutButtonHover.png);
 }
-
 .dialog {
   width: 100%;
   background: ;
@@ -48,11 +43,126 @@ body {
 .template {
   display: none;
 }
-
 #content {
   padding: 20px;
 }
-
 #phraseTable {
-  border-spacing: 6px;
+  border-spacing: 0px;
+  table-layout: fixed;
+  width: 960px;
+  font-size: 11pt;
+}
+#phraseTable td {
+  padding: 8px 0px;
+}
+#phraseTable .key {
+  width: 300px;
+  color: #666;
+}
+#phraseTable .phraseColumn {
+  width: 620px;
+}
+#phraseTable .phrase {
+  color: #69869c;
+  cursor: pointer;
+}
+#phraseTable .phrase:hover {
+  color: #6190b3;
+}
+#phraseTable tr:nth-child(odd) {
+  background: #f7f7f7;
+}
+#phraseTable .controls a {
+  width: 16px; height: 16px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+#phraseTable .editKeyButton { background:url(images/pencil.png); }
+#phraseTable .deleteKeyButton { background:url(images/delete.png); }
+#phraseTable .editKeyButton:hover { background:url(images/pencil_hover.png); }
+#phraseTable .deleteKeyButton:hover { background:url(images/delete_hover.png); }
+
+/* dialog boxes */
+
+.dialog {
+  position: fixed;
+  top: 0; right: 0; left: 0; bottom: 0;
+  background: rgba(0,0,0,0.4);
+}
+
+.dialogBox {
+  background: white;
+  padding: 16px;
+  margin: 60px auto;
+  border: solid #727272 8px;
+  border-radius: 16px;
+  width: 600px;
+}
+
+.dialogBox h1 {
+  padding: 0px;
+  margin: 0px;
+  margin-bottom: 12px;
+  font-size: 16pt;
+  color: #444;
+}
+
+.form_block {
+  padding-bottom: 8px;
+  height: 38px;
+}
+
+.form_block label {
+  color: #666;
+  display: inline-block;
+  width: 120px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.button_block {
+  margin: -6px 0px;
+  text-align: right;
+}
+
+.form_block input[type=text] {
+  color: #4da6e5;
+  border: solid #aaa 1px;
+  outline: none;
+  font-size: 14pt;
+  padding: 4px;
+  width: 460px;
+}
+
+.form_block textarea {
+  padding: 10px;
+  width: 578px;
+  font-size: 12pt;
+}
+
+input[type=submit]:hover { background: url(images/saveButtonHover.png); }
+input[type=submit] { background: url(images/saveButton.png); }
+input.cancel { background: url(images/cancelButton.png); }
+input.cancel:hover { background: url(images/cancelButtonHover.png); }
+
+input[type=submit], input.cancel {
+  cursor: pointer;
+  border: none;
+  width: 152px;
+  height: 57px;
+  outline: none;
+}
+
+
+input[type=submit]:hover {
+  background: url(images/saveButtonHover.png);
+}
+
+.imageBox {
+  background: #eee;
+  border: solid #ccc 1px;
+  max-height: 240px;
+  overflow: scroll;
+  margin-bottom: 10px;
 }
