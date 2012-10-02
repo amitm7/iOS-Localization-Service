@@ -68,3 +68,4 @@ class LocalizationController < ApplicationController
   end
 
 end
+

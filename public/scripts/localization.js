@@ -8,9 +8,19 @@ function localization() {
   function init() {
     $("#languageSelector").ddslick({onSelected: function(item) {
       currentLanguage = item.selectedData.value;
+      setupCancelButtons();
       refreshPhraseKeys();
     }});
+  }
 
+  function setupCancelButtons() {
+    $("#cancelPhraseEditorButton").click(function() {
+      $("#phraseEditor").hide();
+    });
+
+    $("#cancelKeyEditorButton").click(function() {
+      $("#keyEditor").hide();
+    });
   }
 
   function refreshPhraseKeys() {
@@ -75,11 +85,45 @@ function localization() {
 
   function createRow(row) {
     $("#phraseTable .template").clone().removeClass("template").addClass("row")
+      .attr("id", "phraseKey"+row.id)
       .find(".key").text(row.key).end()
       .find(".phrase")
         .text(row.phrase)
-        .attr("href", "#"+row.id)
-      .end()
+        .click(function() { editPhraseWithKeyIdLanguageId(row.id, currentLanguage); return false; }).end()
+      .find(".editKeyButton").click(function() { editPhraseKeyWithId(row); return false; }).end()
+      .find(".deleteKeyButton").click(function() { deletePhraseKeyWithId(row.id, row.key); return false; }).end()
       .appendTo("#phraseTable");
   }
+
+  function editPhraseWithKeyIdLanguageId(keyId, languageId) {
+    $("#phraseEditor")
+      .find(":input").val("").end()
+    .show();
+  }
+
+  function editPhraseKeyWithId(keyId) {
+    if(keyId) {
+      $.post("/phraseKeyDetails", {keyId: keyId}, function(details) {
+        showEditor();
+      });
+    } else {
+      showEditor();
+    }
+
+
+    function showEditor() {
+      $("#keyEditor")
+        .find(":input").val("").end()
+      .show();
+    }
+  }
+
+  function deletePhraseKeyWithId(keyId, keyName) {
+    var warning = ["Are you sure you want to delete ", keyName].join("");
+    if(confirm(warning)) {
+      $.post("/deletePhraseKey", {phraseKeyId: keyId}, function() { });
+      $("phraseKey"+row.id).remove();
+    }
+  }
+
 }

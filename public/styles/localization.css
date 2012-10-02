@@ -86,6 +86,7 @@ body {
 /* dialog boxes */
 
 .dialog {
+  display: none;
   position: fixed;
   top: 0; right: 0; left: 0; bottom: 0;
   background: rgba(0,0,0,0.4);
@@ -135,18 +136,19 @@ body {
   width: 460px;
 }
 
-.form_block textarea {
+textarea {
   padding: 10px;
   width: 578px;
   font-size: 12pt;
+  margin-bottom: 8px;
 }
 
 input[type=submit]:hover { background: url(images/saveButtonHover.png); }
 input[type=submit] { background: url(images/saveButton.png); }
-input.cancel { background: url(images/cancelButton.png); }
-input.cancel:hover { background: url(images/cancelButtonHover.png); }
+input.cancelButton { background: url(images/cancelButton.png); }
+input.cancelButton:hover { background: url(images/cancelButtonHover.png); }
 
-input[type=submit], input.cancel {
+input[type=submit], input.cancelButton {
   cursor: pointer;
   border: none;
   width: 152px;
@@ -162,7 +164,7 @@ input[type=submit]:hover {
 .imageBox {
   background: #eee;
   border: solid #ccc 1px;
-  max-height: 240px;
+  max-height: 340px;
   overflow: scroll;
   margin-bottom: 10px;
 }
