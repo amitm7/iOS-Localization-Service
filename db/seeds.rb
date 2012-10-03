@@ -5,3 +5,14 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Emanuel', :city => cities.first)
+
+require 'digest/md5'
+
+User.create([
+  { :email => 'iosdevs@fareportal.com', :password => Digest::MD5.hexdigest('password1') }
+])
+
+Language.create([
+  { :name => 'English', :file => 'Localizable.strings' }, 
+  { :name => 'Spanish', :file => 'Localizable.sp.strings' }
+])

@@ -51,7 +51,16 @@ class LocalizationController < ApplicationController
   end
 
   def savePhraseKey
+    if session[:user].nil?
+      render :nothing => true
+      return
+    end
+    
+    if params[:keyId].nil?
+      PhraseKey.create(:name => params[:name], :photo => nil)
+    end
 
+    render :nothing => true
   end
 
   def deletePhraseKey 
