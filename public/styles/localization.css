@@ -6,17 +6,23 @@ html, body {
   font-family: helvetica, arial;
 
 }
-body {
 
-}
-#wrapper {
+#background {
   background: url(images/rim.png);
   background-repeat: repeat-y;
+  position: absolute;
+  top: 0px; bottom: 0px;
+  left: -101px; right: -101px;
+}
+
+#wrapper {
+  position: relative;
   margin: 0px auto;
   width: 1000px;
-  padding: 0px 101px;
   min-height: 100%;
+  overflow: visible;
 }
+
 #header {
   background: url(images/header.png);
   height: 80px;
