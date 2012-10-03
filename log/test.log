@@ -1,0 +1,78 @@
+Connecting to database specified by database.yml
+Unable to load entry, underlying cause No such file to load -- entry 
+
+ /Library/Ruby/Gems/1.8/gems/activesupport-3.2.8/lib/active_support/dependencies.rb:317:in `depend_on'
+/Library/Ruby/Gems/1.8/gems/activesupport-3.2.8/lib/active_support/dependencies.rb:225:in `require_dependency'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.2.8/lib/active_record/fixtures.rb:767:in `try_to_load_dependency'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.2.8/lib/active_record/fixtures.rb:782:in `require_fixture_classes'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.2.8/lib/active_record/fixtures.rb:779:in `each'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.2.8/lib/active_record/fixtures.rb:779:in `require_fixture_classes'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.2.8/lib/active_record/fixtures.rb:762:in `fixtures'
+./test/test_helper.rb:10
+/Users/lee/Dev/iOS-Localization-Service/test/unit/entry_test.rb:1:in `require'
+/Users/lee/Dev/iOS-Localization-Service/test/unit/entry_test.rb:1
+/Library/Ruby/Gems/1.8/gems/rake-0.9.2.2/lib/rake/rake_test_loader.rb:10:in `require'
+/Library/Ruby/Gems/1.8/gems/rake-0.9.2.2/lib/rake/rake_test_loader.rb:10
+/Library/Ruby/Gems/1.8/gems/rake-0.9.2.2/lib/rake/rake_test_loader.rb:9:in `each'
+/Library/Ruby/Gems/1.8/gems/rake-0.9.2.2/lib/rake/rake_test_loader.rb:9
+/Library/Ruby/Gems/1.8/gems/rake-0.9.2.2/lib/rake/rake_test_loader.rb:4:in `select'
+/Library/Ruby/Gems/1.8/gems/rake-0.9.2.2/lib/rake/rake_test_loader.rb:4
+Unable to load key, underlying cause No such file to load -- key 
+
+ /Library/Ruby/Gems/1.8/gems/activesupport-3.2.8/lib/active_support/dependencies.rb:317:in `depend_on'
+/Library/Ruby/Gems/1.8/gems/activesupport-3.2.8/lib/active_support/dependencies.rb:225:in `require_dependency'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.2.8/lib/active_record/fixtures.rb:767:in `try_to_load_dependency'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.2.8/lib/active_record/fixtures.rb:782:in `require_fixture_classes'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.2.8/lib/active_record/fixtures.rb:779:in `each'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.2.8/lib/active_record/fixtures.rb:779:in `require_fixture_classes'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.2.8/lib/active_record/fixtures.rb:762:in `fixtures'
+./test/test_helper.rb:10
+/Users/lee/Dev/iOS-Localization-Service/test/unit/entry_test.rb:1:in `require'
+/Users/lee/Dev/iOS-Localization-Service/test/unit/entry_test.rb:1
+/Library/Ruby/Gems/1.8/gems/rake-0.9.2.2/lib/rake/rake_test_loader.rb:10:in `require'
+/Library/Ruby/Gems/1.8/gems/rake-0.9.2.2/lib/rake/rake_test_loader.rb:10
+/Library/Ruby/Gems/1.8/gems/rake-0.9.2.2/lib/rake/rake_test_loader.rb:9:in `each'
+/Library/Ruby/Gems/1.8/gems/rake-0.9.2.2/lib/rake/rake_test_loader.rb:9
+/Library/Ruby/Gems/1.8/gems/rake-0.9.2.2/lib/rake/rake_test_loader.rb:4:in `select'
+/Library/Ruby/Gems/1.8/gems/rake-0.9.2.2/lib/rake/rake_test_loader.rb:4
+Connecting to database specified by database.yml
+Unable to load entry, underlying cause No such file to load -- entry 
+
+ /Library/Ruby/Gems/1.8/gems/activesupport-3.2.8/lib/active_support/dependencies.rb:317:in `depend_on'
+/Library/Ruby/Gems/1.8/gems/activesupport-3.2.8/lib/active_support/dependencies.rb:225:in `require_dependency'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.2.8/lib/active_record/fixtures.rb:767:in `try_to_load_dependency'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.2.8/lib/active_record/fixtures.rb:782:in `require_fixture_classes'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.2.8/lib/active_record/fixtures.rb:779:in `each'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.2.8/lib/active_record/fixtures.rb:779:in `require_fixture_classes'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.2.8/lib/active_record/fixtures.rb:762:in `fixtures'
+./test/test_helper.rb:10
+/Users/lee/Dev/iOS-Localization-Service/test/functional/localization_controller_test.rb:1:in `require'
+/Users/lee/Dev/iOS-Localization-Service/test/functional/localization_controller_test.rb:1
+/Library/Ruby/Gems/1.8/gems/rake-0.9.2.2/lib/rake/rake_test_loader.rb:10:in `require'
+/Library/Ruby/Gems/1.8/gems/rake-0.9.2.2/lib/rake/rake_test_loader.rb:10
+/Library/Ruby/Gems/1.8/gems/rake-0.9.2.2/lib/rake/rake_test_loader.rb:9:in `each'
+/Library/Ruby/Gems/1.8/gems/rake-0.9.2.2/lib/rake/rake_test_loader.rb:9
+/Library/Ruby/Gems/1.8/gems/rake-0.9.2.2/lib/rake/rake_test_loader.rb:4:in `select'
+/Library/Ruby/Gems/1.8/gems/rake-0.9.2.2/lib/rake/rake_test_loader.rb:4
+Unable to load key, underlying cause No such file to load -- key 
+
+ /Library/Ruby/Gems/1.8/gems/activesupport-3.2.8/lib/active_support/dependencies.rb:317:in `depend_on'
+/Library/Ruby/Gems/1.8/gems/activesupport-3.2.8/lib/active_support/dependencies.rb:225:in `require_dependency'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.2.8/lib/active_record/fixtures.rb:767:in `try_to_load_dependency'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.2.8/lib/active_record/fixtures.rb:782:in `require_fixture_classes'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.2.8/lib/active_record/fixtures.rb:779:in `each'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.2.8/lib/active_record/fixtures.rb:779:in `require_fixture_classes'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.2.8/lib/active_record/fixtures.rb:762:in `fixtures'
+./test/test_helper.rb:10
+/Users/lee/Dev/iOS-Localization-Service/test/functional/localization_controller_test.rb:1:in `require'
+/Users/lee/Dev/iOS-Localization-Service/test/functional/localization_controller_test.rb:1
+/Library/Ruby/Gems/1.8/gems/rake-0.9.2.2/lib/rake/rake_test_loader.rb:10:in `require'
+/Library/Ruby/Gems/1.8/gems/rake-0.9.2.2/lib/rake/rake_test_loader.rb:10
+/Library/Ruby/Gems/1.8/gems/rake-0.9.2.2/lib/rake/rake_test_loader.rb:9:in `each'
+/Library/Ruby/Gems/1.8/gems/rake-0.9.2.2/lib/rake/rake_test_loader.rb:9
+/Library/Ruby/Gems/1.8/gems/rake-0.9.2.2/lib/rake/rake_test_loader.rb:4:in `select'
+/Library/Ruby/Gems/1.8/gems/rake-0.9.2.2/lib/rake/rake_test_loader.rb:4
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "entries"
+SQLite3::SQLException: no such table: entries: DELETE FROM "entries"
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
