@@ -1,23 +1,16 @@
 $(document).ready(localization);
 
 function localization() {
-  init();
   var phraseKeys = [];
   var currentLanguage = 1;
 
-  function init() {
-    $("#languageSelector").ddslick({onSelected: function(item) {
-      currentLanguage = item.selectedData.value;
-      setupCancelButtons();
-      refreshPhraseKeys();
-    }});
-  }
+  $("#languageSelector").ddslick({onSelected: function(item) {
+    currentLanguage = item.selectedData.value;
+    setupCancelButtons();
+    refreshPhraseKeys();
+  }});
 
   function setupCancelButtons() {
-    $("#cancelPhraseEditorButton").click(function() {
-      $("#phraseEditor").hide();
-    });
-
     $("#cancelKeyEditorButton").click(function() {
       $("#keyEditor").hide();
     });
@@ -99,23 +92,6 @@ function localization() {
     $("#phraseEditor")
       .find(":input").val("").end()
     .show();
-  }
-
-  function editPhraseKeyWithId(keyId) {
-    if(keyId) {
-      $.post("/phraseKeyDetails", {keyId: keyId}, function(details) {
-        showEditor();
-      });
-    } else {
-      showEditor();
-    }
-
-
-    function showEditor() {
-      $("#keyEditor")
-        .find(":input").val("").end()
-      .show();
-    }
   }
 
   function deletePhraseKeyWithId(keyId, keyName) {

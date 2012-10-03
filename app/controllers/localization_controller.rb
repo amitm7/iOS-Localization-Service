@@ -55,12 +55,18 @@ class LocalizationController < ApplicationController
       render :nothing => true
       return
     end
-    
+
     if params[:keyId].nil?
       PhraseKey.create(:name => params[:name], :photo => nil)
+
+    else
+      pharseKey = PhraseKey.find(params[:id])
+      phraseKey.name = params[:name]      
+      PhraseKey.save
+
     end
 
-    render :nothing => true
+    render :text => "success"
   end
 
   def deletePhraseKey 
