@@ -3,11 +3,11 @@
     <script type="text/javascript" src="scripts/jquery-1.8.1.min.js"></script>
     <script type="text/javascript" src="scripts/jquery.ddslick.js"></script>
     <script type="text/javascript" src="scripts/localization.js"></script>
+    <script type="text/javascript" src="scripts/phraseKeyEditor.js"></script>
     <link rel="Stylesheet" href="styles/localization.css" />
   </head>
   <body>
     <div id="wrapper">
-      <div id="background"></div>
       <div id="header">
         <select id="languageSelector">
           <% @languages.each do |language| %>
@@ -20,7 +20,7 @@
       </div>
       
       <div id="content">
-        <a id="addKey" href="#">Add Key</a>
+        <a id="addKeyButton" href="#">Add Key</a>
         <table id="phraseTable">
           <tr class="template">
             <td class="key"></td>
@@ -34,56 +34,56 @@
           </tr>
         </table>
       </div>
-
-      <div id="keyEditor" class="dialog">
-        <div class="dialogBox">
-          <h1>Key Editor</h1>
-
-          <form action="/savePhraseKey">
-            <div class="form_block">
-              <label for="name">Key</label>
-              <input type="text" id="key" name="key" />
-            </div>
-
-            <div class="form_block">
-              <label for="name">Max Length</label>
-              <input type="text" id="key" name="key" />
-            </div>
-
-            <div class="form_block">
-              <label for="photo">Photo</label>
-              <input type="file" id="photo" name="photo" />
-            </div>
-
-            <div class="button_block">
-              <input type="button" value="" class="cancelButton" id="cancelKeyEditorButton" />
-              <input type="submit" value=""/>
-            </div>
-          </form>
-        </div>
-
-      </div>
-
-      <div id="phraseEditor" class="dialog">
-        <div class="dialogBox">
-          <h1>Phrase Editor -- <span id="keyForPhraseBeingEditted">Key goes here</span></h1>
-          <form action="/savePhrase">
-            <div class="imageBox">
-              <img src="sample2.png"/>
-            </div>
-
-            <div>
-              <textarea style="height: 100px"></textarea>
-            </div>
-            <div class="button_block">
-              <input type="button" class="cancelButton" id="cancelPhraseEditorButton" />
-              <input type="submit" value=""/>
-            </div>
-          </form>
-        </div>
-        
-      </div>
-
+      <div id="background"></div>
     </div>
+
+    <div id="keyEditor" class="dialog">
+      <div class="dialogBox">
+        <h1>Key Editor</h1>
+
+        <form action="/savePhraseKey" name="phraseKeyEditor">
+          <input type="hidden" name="keyId" value="" />
+          <div class="form_block">
+            <label for="name">Key</label>
+            <input type="text" id="name" name="name" />
+          </div>
+
+          <div class="form_block">
+            <label for="maxlength">Max Length</label>
+            <input type="text" id="maxlength" name="maxlength" />
+          </div>
+
+          <div class="form_block">
+            <label for="screenshot">Screenshot</label>
+            <input type="file" id="screenshot" name="screenshot" />
+          </div>
+
+          <div class="button_block">
+            <input type="button" value="" class="cancelButton" id="cancelKeyEditorButton" />
+            <input type="submit" value=""/>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="phraseEditor" class="dialog">
+      <div class="dialogBox">
+        <h1>Phrase Editor -- <span id="keyForPhraseBeingEditted">Key goes here</span></h1>
+        <form action="/savePhrase">
+          <div class="imageBox">
+            <img src="sample2.png"/>
+          </div>
+
+          <div>
+            <textarea style="height: 100px"></textarea>
+          </div>
+          <div class="button_block">
+            <input type="button" class="cancelButton" id="cancelPhraseEditorButton" />
+            <input type="submit" value=""/>
+          </div>
+        </form>
+      </div>
+    </div>
+
   </body>
 </html>

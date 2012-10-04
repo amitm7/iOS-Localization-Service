@@ -12,12 +12,14 @@
 
 ActiveRecord::Schema.define(:version => 0) do
 
+  create_table "screenshots", :force => true do |t|
+    t.binary "binary", :null => false
+    t.string "contentType", :null => false
+  end
   create_table "phrase_keys", :force => true do |t|
     t.string "name", :null => false
     t.integer "maxLength", :null => true
-    t.binary "screenshot"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.references :screenshot
   end
 
   create_table "languages", :force => true do |t|

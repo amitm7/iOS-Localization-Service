@@ -11,5 +11,6 @@ IOSLocalizationService::Application.routes.draw do
   match 'savePhrase' => 'localization#savePhrase'
   match 'savePhraseKey' => 'localization#savePhraseKey'
   match 'deletePhraseKey' => 'localization#deletePhraseKey'
-  match 'imageForPhraseKey' => 'localization#imageForPhraseKey'
+  match 'imageForPhraseKey/:id' => 'localization#imageForPhraseKey'
+  match 'testit' => 'localization#testit'
 end

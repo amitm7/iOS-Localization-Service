@@ -56,21 +56,33 @@ class LocalizationController < ApplicationController
       return
     end
 
-    if params[:keyId].nil?
-      PhraseKey.create(:name => params[:name], :photo => nil)
+    screenshot = nil
 
-    else
-      pharseKey = PhraseKey.find(params[:id])
-      phraseKey.name = params[:name]      
-      PhraseKey.save
-
+    if params[:screenshot].nil? == false 
+      puts(params[:screenshot].tempfile.path)
+      screenshot = Screenshot.create({ 
+        :binary => IO.read(params[:screenshot].tempfile.path),
+        :contentType => params[:screenshot].content_type
+      })
     end
+
+    phraseKey = params[:keyId].empty? ? PhraseKey.new : PhraseKey.find(params[:keyId])
+    phraseKey.name = params[:name]
+    phraseKey.maxLength = params[:maxlength]
+    phraseKey.screenshot = screenshot
+    phraseKey.save
 
     render :text => "success"
   end
 
   def deletePhraseKey 
-
+    if session[:user].nil?
+      render :nothing => true
+      return
+    end
+    phraseKey = PhraseKey.delete(params[:keyId])
+    # phraseKey.delete
+    render :text => "success"
   end
 
   def imageForPhraseKey
@@ -79,8 +91,17 @@ class LocalizationController < ApplicationController
       return
     end
 
-    # http://railsforum.com/viewtopic.php?id=4642
+    phraseKey = PhraseKey.find(params[:id])
+    screenshot = phraseKey.screenshot
+    send_data (screenshot.binary, :type => screenshot.contentType, :disposition => 'inline')
+
   end
 
+  def testit
+    render :json => { 
+      :screenshots => Screenshot.find(:all).length,
+      :phrasKeys => PhraseKey.find(:all).length,
+      :phrases => Phrase.find(:all).length
+    }
+  end
 end
-
