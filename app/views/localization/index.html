@@ -4,6 +4,7 @@
     <script type="text/javascript" src="scripts/jquery.ddslick.js"></script>
     <script type="text/javascript" src="scripts/localization.js"></script>
     <script type="text/javascript" src="scripts/phraseKeyEditor.js"></script>
+    <script type="text/javascript" src="scripts/phraseEditor.js"></script>
     <link rel="Stylesheet" href="styles/localization.css" />
   </head>
   <body>
@@ -37,7 +38,7 @@
       <div id="background"></div>
     </div>
 
-    <div id="keyEditor" class="dialog">
+    <div id="keyEditorDialog" class="dialog">
       <div class="dialogBox">
         <h1>Key Editor</h1>
 
@@ -50,7 +51,7 @@
 
           <div class="form_block">
             <label for="maxlength">Max Length</label>
-            <input type="text" id="maxlength" name="maxlength" />
+            <input type="text" id="maxLength" name="maxLength" />
           </div>
 
           <div class="form_block">
@@ -66,16 +67,16 @@
       </div>
     </div>
 
-    <div id="phraseEditor" class="dialog">
+    <div id="phraseEditorDialog" class="dialog">
       <div class="dialogBox">
-        <h1>Phrase Editor -- <span id="keyForPhraseBeingEditted">Key goes here</span></h1>
-        <form action="/savePhrase">
-          <div class="imageBox">
-            <img src="sample2.png"/>
+        <h1>Phrase Editor -- <span id="keyForPhraseBeingEditted"></span></h1>
+        <form action="/savePhrase" name="phraseEditor">
+          <div class="imageBox" id="screenshotBox">
+            <img id="phraseEditorScreenshot" />
           </div>
-
           <div>
-            <textarea style="height: 100px"></textarea>
+            <div id="maxLengthMessage">Please keep your entry below <span id="maxLengthNumber"></span> characters</div>
+            <textarea style="height: 100px" name="content"></textarea>
           </div>
           <div class="button_block">
             <input type="button" class="cancelButton" id="cancelPhraseEditorButton" />

@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(:version => 0) do
   create_table "users", :force => true do |t|
     t.string "email", :null => false
     t.string "password", :null => false
+    t.boolean "isDeveloper"
   end
 
   create_table "phrases" do |t|

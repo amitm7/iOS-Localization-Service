@@ -36,9 +36,28 @@ class LocalizationController < ApplicationController
       return
     end
 
+    phrase = Phrase.find(:first, :conditions => ["language_id = ? AND phrase_key_id = ?", params[:languageId], params[:keyId]]);
+    phraseKey = PhraseKey.find(params[:keyId])
+
+    render :json => {
+      :key => phraseKey.name,
+      :maxLength => phraseKey.maxLength,
+      :content => phrase.nil? ? "" : phrase.content
+    }
+
   end
 
   def phraseKeyDetails
+    if session[:user].nil?
+      render :nothing => true
+      return
+    end
+
+    phraseKey = PhraseKey.find(params[:keyId])
+    render :json => {
+      :name => phraseKey.name,
+      :maxLength => phraseKey.maxLength
+    }    
 
   end
 
@@ -48,6 +67,14 @@ class LocalizationController < ApplicationController
       return
     end
 
+    phrase = Phrase.find(:first, :conditions => ["language_id = ? AND phrase_key_id = ?", params[:languageId], params[:keyId]]);
+    if phrase.nil?
+      phrase = Phrase.new
+    end
+
+    phrase.phraseKey = PhraseKey.find(params[:keyId])
+    phrase.content = params[:content]
+    render :text => "success"
   end
 
   def savePhraseKey
@@ -69,7 +96,10 @@ class LocalizationController < ApplicationController
     phraseKey = params[:keyId].empty? ? PhraseKey.new : PhraseKey.find(params[:keyId])
     phraseKey.name = params[:name]
     phraseKey.maxLength = params[:maxlength]
-    phraseKey.screenshot = screenshot
+    if screenshot.nil? == false
+      phraseKey.screenshot = screenshot
+    end
+
     phraseKey.save
 
     render :text => "success"
@@ -81,7 +111,6 @@ class LocalizationController < ApplicationController
       return
     end
     phraseKey = PhraseKey.delete(params[:keyId])
-    # phraseKey.delete
     render :text => "success"
   end
 
@@ -93,8 +122,11 @@ class LocalizationController < ApplicationController
 
     phraseKey = PhraseKey.find(params[:id])
     screenshot = phraseKey.screenshot
-    send_data (screenshot.binary, :type => screenshot.contentType, :disposition => 'inline')
-
+    if screenshot.nil? == false
+      send_data (screenshot.binary, :type => screenshot.contentType, :disposition => 'inline')
+    else
+      render :nothing => true
+    end
   end
 
   def testit
@@ -103,5 +135,6 @@ class LocalizationController < ApplicationController
       :phrasKeys => PhraseKey.find(:all).length,
       :phrases => Phrase.find(:all).length
     }
+
   end
 end

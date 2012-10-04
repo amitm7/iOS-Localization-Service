@@ -23,14 +23,11 @@ html, body {
   overflow: visible;
 }
 
-#wrapper > * {
-  z-index: 1;
-  position: relative;
-}
-
 #header {
   background: url(images/header.png);
   height: 80px;
+  position: relative;  
+  z-index: 2;
 }
 
 #languageSelector {
@@ -56,6 +53,8 @@ html, body {
 }
 #content {
   padding: 20px;
+  position: relative;  
+  z-index: 1;  
 }
 #phraseTable {
   border-spacing: 0px;
@@ -101,7 +100,7 @@ html, body {
   position: fixed;
   top: 0; right: 0; left: 0; bottom: 0;
   background: rgba(0,0,0,0.4);
-  z-index: 2;
+  z-index: 4;
 }
 
 .dialogBox {

@@ -1,27 +1,33 @@
-function phraseKeyEditor(keyId) {
+function phraseKeyEditor(keyId, onsuccess) {
   var form = document.forms.phraseKeyEditor;
 
   clearFields();
   showEditor();
-  $("#cancelPhraseEditorButton").click(function() {
-    $("#phraseEditor").hide();
+  $("#keyEditorDialog :input").prop("disabled", false);
+  
+  $("#cancelKeyEditorButton").click(function() {
+    $("#keyEditorDialog").hide();
   });
 
   function clearFields() {
-    $("#keyEditor").find(":input").val("");    
+    $("#keyEditorDialog").find(":input").val("");    
   }
 
   function showEditor() {
     if(keyId) {
       $.post("/phraseKeyDetails", {keyId: keyId}, function(details) {
         form.keyId.value = details.phrase_key_id;
-        $("#keyEditor").show();
+        form.name.value = details.name;
+        form.maxLength.value = details.maxLength;
+        $("#keyEditorDialog").show();
       });
     } else {
-      $("#keyEditor").show();
+      $("#keyEditorDialog").show();
     }
 
     $(form).submit(function() {
+      $("#keyEditorDialog :input").prop("disabled", true);
+
       $.ajax({
         url: '/savePhraseKey',
         type: 'POST',
@@ -29,7 +35,8 @@ function phraseKeyEditor(keyId) {
         contentType: false,
         processData: false,
         success: function(response) {
-          
+          $("#keyEditorDialog").hide();
+          onsuccess();
         } 
       });
 

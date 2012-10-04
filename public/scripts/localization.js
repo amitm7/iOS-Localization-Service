@@ -87,17 +87,10 @@ function localization() {
       .find(".key").text(row.key).end()
       .find(".phrase")
         .text(row.phrase)
-        .click(function() { editPhrase(row.id, currentLanguage); return false; }).end()
-      .find(".editKeyButton").click(function() { phraseKeyEditor(keyId); return false; }).end()
-      .find(".deleteKeyButton").click(function() { deletePhraseKey(row.id, row.key); return false; }).end()
+        .click(function() { phraseEditor(row.id, currentLanguage, refreshPhraseKeys); return false; }).end()
+      .find(".editKeyButton").click(function() { phraseKeyEditor(row.id, refreshPhraseKeys); return false; }).end()
+      .find(".deleteKeyButton").click(function() { deletePhraseKey(row.id, row.key, refreshPhraseKeys); return false; }).end()
       .appendTo("#phraseTable");
-  }
-
-  function editPhrase(keyId, languageId) {
-
-    $("#phraseEditor")
-      .find(":input").val("").end()
-    .show();
   }
 
   function deletePhraseKey(keyId, keyName) {
