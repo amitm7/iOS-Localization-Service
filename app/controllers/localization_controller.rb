@@ -68,11 +68,12 @@ class LocalizationController < ApplicationController
     end
 
     phrase = Phrase.where(:language_id => params[:languageId], :phrase_key_id => params[:keyId]).first
+
     if(phrase.nil?)
       phrase = Phrase.new
     end
 
-    phrase.phraseKey = PhraseKey.find(params[:keyId])
+    phrase.phrase_key = PhraseKey.find(params[:keyId])
     phrase.language = Language.find(params[:languageId])
     phrase.content = params[:content]
     phrase.save
@@ -96,10 +97,9 @@ class LocalizationController < ApplicationController
       })
     end
 
-    puts(params[:keyId])
     phraseKey = params[:keyId].empty? ? PhraseKey.new : PhraseKey.find(params[:keyId])
     phraseKey.name = params[:name]
-    phraseKey.maxLength = params[:maxlength]
+    phraseKey.maxLength = params[:maxLength]
     if screenshot.nil? == false
       phraseKey.screenshot = screenshot
     end
@@ -114,7 +114,15 @@ class LocalizationController < ApplicationController
       render :nothing => true
       return
     end
-    phraseKey = PhraseKey.delete(params[:keyId])
+
+    keyId = params[:keyId]
+    phraseKey = PhraseKey.find(keyId)
+    if(phraseKey.screenshot.nil? == false)
+      phraseKey.screenshot.delete
+    end
+    phraseKey.phrases.delete_all
+    phraseKey.delete
+
     render :text => "success"
   end
 
@@ -127,18 +135,9 @@ class LocalizationController < ApplicationController
     phraseKey = PhraseKey.find(params[:id])
     screenshot = phraseKey.screenshot
     if screenshot.nil? == false
-      send_data (screenshot.binary, :type => screenshot.contentType, :disposition => 'inline')
+      send_data(screenshot.binary, :type => screenshot.contentType, :disposition => 'inline')
     else
       render :nothing => true
     end
-  end
-
-  def testit
-    render :json => { 
-      :screenshots => Screenshot.find(:all).length,
-      :phrasKeys => PhraseKey.find(:all).length,
-      :phrases => Phrase.find(:all).length
-    }
-
   end
 end

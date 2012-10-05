@@ -5,7 +5,6 @@ function phraseKeyEditor(keyId, onsuccess) {
   showEditor();
   setupCancelEvent();
   setupFormSubmit();
-
   
   function setupCancelEvent() {
     $("#cancelKeyEditorButton").click(function() {
@@ -27,7 +26,7 @@ function phraseKeyEditor(keyId, onsuccess) {
   function showEditor() {
     if(keyId) {
       $.post("/phraseKeyDetails", {keyId: keyId}, function(details) {
-        form.keyId.value = details.phrase_key_id;
+        form.keyId.value = keyId;
         form.name.value = details.name;
         form.maxLength.value = details.maxLength;
         $("#keyEditorDialog").show();

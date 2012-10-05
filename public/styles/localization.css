@@ -30,17 +30,39 @@ html, body {
   z-index: 2;
 }
 
-#languageSelector {
+#toolbar {
+  padding: 24px 20px;
+  position:relative;
+  letter-spacing: 8px;
+}
+#toolbar > * {
+  letter-spacing: normal;
+}
+
+#addKeyButton {
+  vertical-align: middle;
+  background: url(images/addKeyButton.png);
+  display: inline-block;
+  width:72px; height:30px;  
+}
+
+#addKeyButton:hover {
+  background: url(images/addKeyButtonHover.png);
+}
+
+#logoutButton {
+  vertical-align: middle;  
+  background: url(images/logoutButton.png);  
+  display: inline-block;
+  width:72px; height:30px;
   position: absolute;
-  top: 18px; left: 20px;
+  right: 20px;
+}
+
+#languageSelector {
   width: 134px; height: 32px;
 }
-#logoutButton {
-  position: absolute;
-  top: 22px; right: 30px;
-  width:71px; height:30px;
-  background: url(images/logoutButton.png);
-}
+
 #logoutButton:hover {
   background: url(images/logoutButtonHover.png);
 }

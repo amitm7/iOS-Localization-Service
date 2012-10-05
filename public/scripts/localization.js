@@ -2,8 +2,10 @@ $(document).ready(localization);
 
 function localization() {
   var phraseKeys = [];
-  var currentLanguage = 1;
-
+  var currentLanguage;
+  var defaultLanguage = 1;
+  
+  setLanguage(defaultLanguage);
   $(document).keyup(function(e) {
     if(isDialogVisible()) return;
     if (e.keyCode == 65) { $("#addKeyButton").click(); }
@@ -18,11 +20,18 @@ function localization() {
     return false;
   });
 
-  $("#languageSelector").ddslick({onSelected: function(item) {
-    currentLanguage = item.selectedData.value;
+  $("#languageSelector").dropkick({
+    change: function (value, label) {
+      setLanguage(value);
+    }
+  });
+  
+
+  function setLanguage(languageId) {
+    currentLanguage = languageId;
     setupCancelButtons();
     refreshPhraseKeys();
-  }});
+  }
 
   function setupCancelButtons() {
     $("#cancelKeyEditorButton").click(function() {

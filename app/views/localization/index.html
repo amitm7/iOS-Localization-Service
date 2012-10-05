@@ -1,27 +1,28 @@
 <html>
   <head>
     <script type="text/javascript" src="scripts/jquery-1.8.1.min.js"></script>
-    <script type="text/javascript" src="scripts/jquery.ddslick.js"></script>
+    <script type="text/javascript" src="scripts/jquery.dropkick.js"></script>
     <script type="text/javascript" src="scripts/localization.js"></script>
     <script type="text/javascript" src="scripts/phraseKeyEditor.js"></script>
     <script type="text/javascript" src="scripts/phraseEditor.js"></script>
     <link rel="Stylesheet" href="styles/localization.css" />
+    <link rel="Stylesheet" href="styles/dropkick.css" />
   </head>
   <body>
     <div id="wrapper">
       <div id="header">
-        <select id="languageSelector">
-          <% @languages.each do |language| %>
-            <option value="<%=language.id %>"><%=language.name %></option>
-          <% end %>
-          %>
-        </select>
-
-        <a href="/doLogout" id="logoutButton"></a>
+        <div id="toolbar">
+          <a href="#" id="addKeyButton"></a>
+          <select id="languageSelector" style="width: 200px;">
+            <% @languages.each do |language| %>
+              <option value="<%=language.id %>"><%=language.name %></option>
+            <% end %>
+          </select>
+          <a href="/doLogout" id="logoutButton"></a>
+        </div>
       </div>
       
       <div id="content">
-        <a id="addKeyButton" href="#">Add Key</a>
         <table id="phraseTable">
           <tr class="template">
             <td class="key"></td>

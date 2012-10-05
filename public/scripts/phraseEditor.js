@@ -27,9 +27,11 @@ function phraseEditor(keyId, languageId, onsuccess) {
 
   function showEditor() {
     $.post("/phraseDetails", {keyId: keyId, languageId: languageId}, function(details) {
-      document.forms.phraseEditor.content.value = details.content;
-      $("#keyForPhraseBeingEditted").text(details.key)
       $("#phraseEditorDialog").show();
+
+      $("#keyForPhraseBeingEditted").text(details.key)
+      form.content.value = details.content;      
+      form.content.focus();
 
       if(details.maxLength) {
         $("#maxLengthMessage").show();
