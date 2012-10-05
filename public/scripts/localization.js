@@ -4,8 +4,17 @@ function localization() {
   var phraseKeys = [];
   var currentLanguage = 1;
 
+  $(document).keyup(function(e) {
+    if(isDialogVisible()) return;
+    if (e.keyCode == 65) { $("#addKeyButton").click(); }
+  });
+
+  function isDialogVisible() {
+    return $(".dialog:not(:hidden)").length > 0;
+  }
+
   $("#addKeyButton").click(function() {
-    phraseKeyEditor();
+    phraseKeyEditor(null, refreshPhraseKeys);
     return false;
   });
 
@@ -87,16 +96,21 @@ function localization() {
       .find(".key").text(row.key).end()
       .find(".phrase")
         .text(row.phrase)
-        .click(function() { phraseEditor(row.id, currentLanguage, refreshPhraseKeys); return false; }).end()
-      .find(".editKeyButton").click(function() { phraseKeyEditor(row.id, refreshPhraseKeys); return false; }).end()
-      .find(".deleteKeyButton").click(function() { deletePhraseKey(row.id, row.key, refreshPhraseKeys); return false; }).end()
+        .click(function() { 
+          phraseEditor(row.id, currentLanguage, function() { refreshPhraseKeys(); });
+          return false; }).end()
+      .find(".editKeyButton").click(function() { 
+        phraseKeyEditor(row.id, function() { refreshPhraseKeys(); }); 
+        return false; 
+      }).end()
+      .find(".deleteKeyButton").click(function() { deletePhraseKey(row.id, row.key); return false; }).end()
       .appendTo("#phraseTable");
   }
 
   function deletePhraseKey(keyId, keyName) {
     var warning = ["Are you sure you want to delete ", keyName].join("");
     if(confirm(warning)) {
-      $.post("/deletePhraseKey", {keyId: keyId}, function() { });
+      $.post("/deletePhraseKey", {keyId: keyId}, function() { refreshPhraseKeys(); });
       $("#phraseKey"+keyId).remove();
     }
   }

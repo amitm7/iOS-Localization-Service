@@ -3,14 +3,25 @@ function phraseKeyEditor(keyId, onsuccess) {
 
   clearFields();
   showEditor();
-  $("#keyEditorDialog :input").prop("disabled", false);
+  setupCancelEvent();
+  setupFormSubmit();
+
   
-  $("#cancelKeyEditorButton").click(function() {
-    $("#keyEditorDialog").hide();
-  });
+  function setupCancelEvent() {
+    $("#cancelKeyEditorButton").click(function() {
+      $("#keyEditorDialog").hide();
+    });
+
+    $(form).keyup(function(e) {
+      if (e.keyCode == 27) { $("#cancelKeyEditorButton").click(); }
+    });
+
+  }
 
   function clearFields() {
-    $("#keyEditorDialog").find(":input").val("");    
+    $("#keyEditorDialog :input").prop("disabled", false);    
+    $("#keyEditorDialog").find(":input").val("");  
+    $(form).unbind();  
   }
 
   function showEditor() {
@@ -20,11 +31,15 @@ function phraseKeyEditor(keyId, onsuccess) {
         form.name.value = details.name;
         form.maxLength.value = details.maxLength;
         $("#keyEditorDialog").show();
+        form.name.focus();
       });
     } else {
       $("#keyEditorDialog").show();
+      form.name.focus();
     }
+  }
 
+  function setupFormSubmit() {
     $(form).submit(function() {
       $.ajax({
         url: '/savePhraseKey',
@@ -40,8 +55,7 @@ function phraseKeyEditor(keyId, onsuccess) {
 
       $("#keyEditorDialog :input").prop("disabled", true);
       return false;
-    });
-
+    });    
   }
 
 

@@ -67,14 +67,17 @@ class LocalizationController < ApplicationController
       return
     end
 
-    phrase = Phrase.find(:first, :conditions => ["language_id = ? AND phrase_key_id = ?", params[:languageId], params[:keyId]]);
-    if phrase.nil?
+    phrase = Phrase.where(:language_id => params[:languageId], :phrase_key_id => params[:keyId]).first
+    if(phrase.nil?)
       phrase = Phrase.new
     end
 
     phrase.phraseKey = PhraseKey.find(params[:keyId])
+    phrase.language = Language.find(params[:languageId])
     phrase.content = params[:content]
-    render :text => "success"
+    phrase.save
+
+    render :json => phrase
   end
 
   def savePhraseKey
