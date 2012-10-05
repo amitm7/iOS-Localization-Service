@@ -93,6 +93,7 @@ class LocalizationController < ApplicationController
       })
     end
 
+    puts(params[:keyId])
     phraseKey = params[:keyId].empty? ? PhraseKey.new : PhraseKey.find(params[:keyId])
     phraseKey.name = params[:name]
     phraseKey.maxLength = params[:maxlength]

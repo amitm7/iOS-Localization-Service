@@ -26,8 +26,6 @@ function phraseKeyEditor(keyId, onsuccess) {
     }
 
     $(form).submit(function() {
-      $("#keyEditorDialog :input").prop("disabled", true);
-
       $.ajax({
         url: '/savePhraseKey',
         type: 'POST',
@@ -40,6 +38,7 @@ function phraseKeyEditor(keyId, onsuccess) {
         } 
       });
 
+      $("#keyEditorDialog :input").prop("disabled", true);
       return false;
     });
 
