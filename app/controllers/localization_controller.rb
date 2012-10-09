@@ -141,4 +141,23 @@ class LocalizationController < ApplicationController
       render :nothing => true
     end
   end
+
+  def translate
+    languageId = Language.where(:name => params[:id]).first.id
+    data = Phrase.all(
+      :select => "name, phraseKey.name",
+      :conditions => ["language_id = ?", languageId],
+      :include => :phrase_key)
+    # output = data.map{|phrase| "\"" + phrase.phrase_key.name + "\" = \"" + sanitize(phrase.content) + "\";\n"}.join
+    output = data.map{|phrase| 
+      key = phrase.phrase_key.name
+      content = sanitize(phrase.content) 
+      "\"#{key}\" = \"#{content}\";\n"
+    }
+    send_data(output, :disposition => 'inline', :type => 'text/plain')
+  end
+
+  def sanitize(s)
+    return s.gsub (/\"/, "\\\"")
+  end
 end
