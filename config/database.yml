@@ -4,7 +4,7 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
 
-development:
+production:
   adapter: mysql
   encoding: utf8
   host: jenkins
@@ -16,7 +16,7 @@ test:
   database: db/test.sqlite3
   pool: 5
   timeout: 5000
-production:
+development:
   adapter: sqlite3
   database: db/development.sqlite3
   pool: 5
