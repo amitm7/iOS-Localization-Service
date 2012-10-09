@@ -56,6 +56,4 @@ function phraseKeyEditor(keyId, onsuccess) {
       return false;
     });    
   }
-
-
 }

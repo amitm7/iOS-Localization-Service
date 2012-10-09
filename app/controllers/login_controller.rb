@@ -22,6 +22,9 @@ class LoginController < ApplicationController
   end
 
   def createuser
+    if isDeveloper == false
+      return
+    end
     if params[:email].nil? or params[:password].nil?
       return
     end

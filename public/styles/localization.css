@@ -88,7 +88,7 @@ html, body {
   padding: 8px 0px;
 }
 #phraseTable .key {
-  width: 300px;
+  width: 244px;
   color: #666;
 }
 #phraseTable .phraseColumn {
@@ -104,10 +104,28 @@ html, body {
 #phraseTable tr:nth-child(odd) {
   background: #f7f7f7;
 }
+#phraseTable tr.highlight {
+  background: #d9efff;
+}
+#phraseTable td:first-child {
+  padding-left: 8px;
+}
+#phraseTable td:last-child {
+  padding-right: 8px;
+}
 #phraseTable .controls a {
   width: 16px; height: 16px;
   display: inline-block;
   cursor: pointer;
+}
+
+#phraseTable .hasPhoto div {
+  background: url(images/camera.png);
+  width: 16px; height: 16px;
+}
+
+#phraseTable tr.nophrase a.phrase {
+  font-weight: bold;
 }
 
 #phraseTable .editKeyButton { background:url(images/pencil.png); }
@@ -115,6 +133,9 @@ html, body {
 #phraseTable .editKeyButton:hover { background:url(images/pencil_hover.png); }
 #phraseTable .deleteKeyButton:hover { background:url(images/delete_hover.png); }
 
+.translator #phraseTable .controls {
+  display: none;
+}
 /* dialog boxes */
 
 .dialog {
@@ -189,7 +210,6 @@ input[type=submit], input.cancelButton {
   outline: none;
 }
 
-
 input[type=submit]:hover {
   background: url(images/saveButtonHover.png);
 }
@@ -200,4 +220,15 @@ input[type=submit]:hover {
   max-height: 340px;
   overflow: scroll;
   margin-bottom: 10px;
+}
+
+#englishPhraseBox {
+  margin-bottom: 12px;
+  max-height: 60px;
+  overflow: scroll;
+  font-size: 11pt;
+}
+
+#englishPhrase {
+  font-weight: bold;
 }

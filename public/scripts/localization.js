@@ -4,12 +4,66 @@ function localization() {
   var phraseKeys = [];
   var currentLanguage;
   var defaultLanguage = 1;
-  
+  var highlightedIndex = 0;
+  var rowHeight = 0;
+  var isDeveloper = $("body.developer").length > 0
+
   setLanguage(defaultLanguage);
   $(document).keyup(function(e) {
     if(isDialogVisible()) return;
-    if (e.keyCode == 65) { $("#addKeyButton").click(); }
+    if (e.keyCode == 65) $("#addKeyButton").click();
+    if (e.keyCode == 13 && highlightedIndex != 0) editPhraseAtIndex(highlightedIndex);
+    if (e.keyCode == 69 && highlightedIndex != 0 && isDeveloper) editPhraseKeyAtIndex(highlightedIndex);
+    if (e.keyCode == 68 && highlightedIndex != 0 && isDeveloper) deletePhraseKeyAtIndex(highlightedIndex);
   });
+
+  $(document).keydown(function(e) {
+    if(isDialogVisible()) return;
+    if(e.keyCode == 38) { upPressed(); return false; }
+    if(e.keyCode == 40) { downPressed(); return false; }
+  });
+
+  function upPressed() {
+    highlightedIndex--;
+    if(highlightedIndex < 1) highlightedIndex = phraseKeys.length;
+    highlightSelectedIndex();
+    scrollToSelectedIndex();
+  }
+
+  function downPressed() {
+    highlightedIndex++;
+    if(highlightedIndex > phraseKeys.length) highlightedIndex = 1;
+    highlightSelectedIndex();
+    scrollToSelectedIndex();
+  }
+
+  function editPhraseAtIndex(index) {
+    var phraseKey = $("#phraseTable")[0].rows[index].phraseKey;
+    phraseEditor(phraseKey.id, currentLanguage, function() { refreshPhraseKeys(); });
+  }
+
+  function editPhraseKeyAtIndex(index) {
+    var phraseKey = $("#phraseTable")[0].rows[index].phraseKey;
+    phraseKeyEditor(phraseKey.id, function() { refreshPhraseKeys(); });
+  }
+
+  function deletePhraseKeyAtIndex(index) {
+    var phraseKey = $("#phraseTable")[0].rows[index].phraseKey;
+    deletePhraseKey(phraseKey.id, phraseKey.key);
+  }
+
+  function highlightSelectedIndex() {
+    $("#phraseTable tr").removeClass("highlight")
+    $(document.getElementById("phraseTable").rows[highlightedIndex]).addClass("highlight");
+  }
+
+  function scrollToSelectedIndex() {
+    if(rowHeight == 0) {
+      rowHeight = $("#phraseTable .row").outerHeight(true);
+    }
+    var height = $(window).height();
+    document.body.scrollTop = highlightedIndex * rowHeight - 90;
+  }
 
   function isDialogVisible() {
     return $(".dialog:not(:hidden)").length > 0;
@@ -47,8 +101,13 @@ function localization() {
   }
 
   function showPhrasesForLanguage(language) {
+    var yoffset = window.pageYOffset
+    var xoffset = window.pageXOffset
+
     $.get("/phrases", {language_id: language}, function(phrases) {
       buildLanguageGrid(phrases);
+      window.scrollTo(xoffset, yoffset);
+      highlightSelectedIndex();
     });
   }
 
@@ -63,30 +122,37 @@ function localization() {
 
   function keysWithPhrases(phrases) {
     var maxPhraseLength = 80;
-    var maxKeyLength = 32;
+    var maxKeyLength = 28;
     var output = [];
     var phraseDictionary = buildPhraseDictionary(phrases);
 
     for(var phraseKeyIndex in phraseKeys) {
       var phraseKey = phraseKeys[phraseKeyIndex];
       var phrase = phraseDictionary[phraseKey.id];
-      var phraseContent = null;
-      if(phrase) {
-        phraseContent = phrase.content.length > maxPhraseLength ? phrase.content.substring(0,maxPhraseLength) + "..." : phrase.content
-      } else {
-        phraseContent = "<NO PHRASE SET>"
-      }
+      var phraseContent = truncate(phrase ? phrase.content : null, maxPhraseLength)
 
       output.push({
         id: phraseKey.id,
-        key: phraseKey.name.length > maxKeyLength ? phraseKey.name.substring(0,maxKeyLength) + "..." : phraseKey.name,
-        phrase: phraseContent
+        key: truncate(phraseKey.name, maxKeyLength),
+        phrase: phraseContent,
+        hasPhoto: phraseKey.hasPhoto,
+        hasPhrase: phrase && phrase.content ? true : false
       });
     }
 
     return output.sort(function(a,b) {
-      return (a.key < b.key) ? -1 : 1;
+      if(a.hasPhrase == b.hasPhrase) {
+        return (a.key < b.key) ? -1 : 1;
+      } else {
+        return (a.hasPhrase < b.hasPhrase) ? -1 : 1;
+      }
     });
+
+    function truncate(s, max) {
+      if(!s) return s;
+      if(s.length < max) return s;
+      return s.substring(0,max) + "...";
+    }
   }
 
   function buildPhraseDictionary(phrases) {
@@ -100,20 +166,27 @@ function localization() {
   }
 
   function createRow(row) {
-    $("#phraseTable .template").clone().removeClass("template").addClass("row")
+    var tr = $("#phraseTable .template").clone().removeClass("template")
+      .addClass("row").addClass(row.hasPhrase ? "" : "nophrase")
       .attr("id", "phraseKey"+row.id)
       .find(".key").text(row.key).end()
       .find(".phrase")
-        .text(row.phrase)
+        .text(row.hasPhrase ? row.phrase : "<NO PHRASE SET>")
         .click(function() { 
           phraseEditor(row.id, currentLanguage, function() { refreshPhraseKeys(); });
-          return false; }).end()
+          return false; 
+        }).end()
+      .find(".hasPhoto div").each(function() { 
+        if(row.hasPhoto) $(this).show();
+        else $(this).hide();
+      }).end()        
       .find(".editKeyButton").click(function() { 
         phraseKeyEditor(row.id, function() { refreshPhraseKeys(); }); 
         return false; 
       }).end()
       .find(".deleteKeyButton").click(function() { deletePhraseKey(row.id, row.key); return false; }).end()
-      .appendTo("#phraseTable");
+      .appendTo("#phraseTable")[0];
+      tr.phraseKey = row;
   }
 
   function deletePhraseKey(keyId, keyName) {

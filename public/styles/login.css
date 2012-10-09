@@ -76,3 +76,12 @@ input[type=submit] {
 input[type=submit]:hover {
   background: url(images/loginButtonHover.png);
 }
+
+#badlogin {
+  display: none;
+  position: absolute;
+  left: 24px;
+  right: 180px;
+  top: 130px; 
+  color: red;
+}

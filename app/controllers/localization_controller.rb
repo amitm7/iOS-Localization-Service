@@ -7,21 +7,26 @@ class LocalizationController < ApplicationController
     end
 
     @languages = Language.all
+    @isDeveloper = session[:user].isDeveloper
     render "index"
   end
 
   def phraseKeys
-    if session[:user].nil? 
-      render :nothing => true
+    if isUser == false
       return
     end
 
-    render :json => PhraseKey.find(:all, :select => "id, name")
+    phraseKeys = PhraseKey.all(:select => "id, name, screenshot.id", :include => :screenshot)
+    render :json => phraseKeys.collect{|phraseKey| {
+        :id => phraseKey.id,
+        :name => phraseKey.name,
+        :hasPhoto => phraseKey.screenshot.nil? == false
+      }
+    }
   end
 
   def phrases
-    if session[:user].nil?
-      render :nothing => true
+    if isUser == false
       return
     end
 
@@ -31,25 +36,25 @@ class LocalizationController < ApplicationController
   end
 
   def phraseDetails
-    if session[:user].nil?
-      render :nothing => true
+    if isUser == false
       return
     end
 
     phrase = Phrase.find(:first, :conditions => ["language_id = ? AND phrase_key_id = ?", params[:languageId], params[:keyId]]);
+    englishPhrase = Phrase.find(:first, :conditions => ["language_id = ? AND phrase_key_id = ?", 1, params[:keyId]]);
     phraseKey = PhraseKey.find(params[:keyId])
 
     render :json => {
       :key => phraseKey.name,
       :maxLength => phraseKey.maxLength,
-      :content => phrase.nil? ? "" : phrase.content
+      :content => phrase.nil? ? "" : phrase.content,
+      :englishContent => englishPhrase.nil? ? "" : englishPhrase.content
     }
 
   end
 
   def phraseKeyDetails
-    if session[:user].nil?
-      render :nothing => true
+    if isDeveloper == false
       return
     end
 
@@ -62,8 +67,7 @@ class LocalizationController < ApplicationController
   end
 
   def savePhrase
-    if session[:user].nil?
-      render :nothing => true
+    if isDeveloper == false
       return
     end
 
@@ -82,8 +86,7 @@ class LocalizationController < ApplicationController
   end
 
   def savePhraseKey
-    if session[:user].nil?
-      render :nothing => true
+    if isDeveloper == false
       return
     end
 
@@ -110,8 +113,7 @@ class LocalizationController < ApplicationController
   end
 
   def deletePhraseKey 
-    if session[:user].nil?
-      render :nothing => true
+    if isDeveloper == false
       return
     end
 
@@ -127,8 +129,7 @@ class LocalizationController < ApplicationController
   end
 
   def imageForPhraseKey
-    if session[:user].nil?
-      render :nothing => true
+    if isUser == false
       return
     end
 

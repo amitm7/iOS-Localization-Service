@@ -20,6 +20,7 @@ function phraseEditor(keyId, languageId, onsuccess) {
   function resetDialog() {
     $("#screenshotBox").show();
     $("#maxLengthMessage").hide();
+    $("#englishPhraseBox").hide();
     $("#phraseEditorDialog :input").prop("disabled", false);
     $("#phraseEditorDialog").find(":input").val("");
     $(form).unbind();
@@ -28,7 +29,6 @@ function phraseEditor(keyId, languageId, onsuccess) {
   function showEditor() {
     $.post("/phraseDetails", {keyId: keyId, languageId: languageId}, function(details) {
       $("#phraseEditorDialog").show();
-
       $("#keyForPhraseBeingEditted").text(details.key)
       form.content.value = details.content;      
       form.content.focus();
@@ -36,8 +36,11 @@ function phraseEditor(keyId, languageId, onsuccess) {
       if(details.maxLength) {
         $("#maxLengthMessage").show();
         $("#maxLengthNumber").text(details.maxLength);
-      } else {
-        
+      }
+
+      if(details.englishContent && languageId != 1) {
+        $("#englishPhraseBox").show();
+        $("#englishPhrase").text(details.englishContent);
       }
     });
   }
