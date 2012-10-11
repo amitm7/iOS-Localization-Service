@@ -39,6 +39,9 @@ html, body {
   letter-spacing: normal;
 }
 
+.translator #addKeyButton {
+  display: none;
+}
 #addKeyButton {
   vertical-align: middle;
   background: url(images/addKeyButton.png);
@@ -232,3 +235,4 @@ input[type=submit]:hover {
 #englishPhrase {
   font-weight: bold;
 }
+

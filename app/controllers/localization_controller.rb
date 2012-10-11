@@ -67,7 +67,7 @@ class LocalizationController < ApplicationController
   end
 
   def savePhrase
-    if isDeveloper == false
+    if isUser == false
       return
     end
 
